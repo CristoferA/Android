@@ -6,19 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity {
 
-    private TextView text1;
-    private EditText edit1,edit2;
-    private Button btn1;
-    private Button btn2;
+    private TextView text1_second, text2_second;
+    private Button btn_atras_second;
     private SharedPreferences prefs;
     private String nombre;
     private String run;
@@ -28,11 +23,10 @@ public class MainActivity extends AppCompatActivity {
     private String contrasena;
     private Integer registrado;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_second);
 
         prefs = getSharedPreferences("Preference", Context.MODE_PRIVATE);
         nombre = getSharedNombre();
@@ -43,59 +37,26 @@ public class MainActivity extends AppCompatActivity {
         contrasena = getSharedContrasena();
         registrado = getSharedRegistrado();
 
-        text1=findViewById(R.id.text1);
-        edit1=findViewById(R.id.edit1);
-        edit2=findViewById(R.id.edit2);
-        btn1=findViewById(R.id.btn1);
-        btn2=findViewById(R.id.btn2);
+        text1_second =findViewById(R.id.text1_second);
+        text2_second = findViewById(R.id.text2_second);
 
-        btn1.setOnClickListener(new View.OnClickListener() {
+        text2_second.setText("Dr. "+nombre);
+        btn_atras_second=findViewById(R.id.btn_atras_second);
+
+
+        btn_atras_second.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isValidForm()){
-                    registrado=1;
-                    saveShared(nombre,run,correo,especialidad,ubicacionConsulta,contrasena,registrado);
-                    Intent intent = new Intent(MainActivity.this,Splashscreen.class);
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(getApplicationContext(),"Run y/o contrasena invalida",Toast.LENGTH_LONG).show();
-
-                }
-
-            }
-        });
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
+                registrado=0;
+                saveShared(nombre,run,correo,especialidad,ubicacionConsulta,contrasena,registrado);
+                Intent intent =new Intent(SecondActivity.this,Splashscreen.class);
                 startActivity(intent);
 
             }
         });
-
     }
 
 
-
-    private boolean isValidForm(){
-        boolean r=false;
-        if(TextUtils.isEmpty(edit1.getText())){
-            edit1.setError("El run es obligatorio");
-        }else if(TextUtils.isEmpty(edit2.getText())){
-            edit2.setError("La contraseña es obligatoria");
-
-        }else{
-            if(edit1.getText().toString().equals(run) && edit2.getText().toString().equals(contrasena)){
-                r = true;
-
-            }else {
-                edit1.setError("Run y/o contrasena invalida");
-            }
-        }
-
-        return r;
-    }
 
 
     void saveShared(String nombre, String run, String correo, String especialidad, String ubicacionConsulta, String contrasena, int registrado){

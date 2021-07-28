@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linearlayout"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    tools:context=".SecondActivity">
+
+
+    <TextView
+        android:id="@+id/text1_second"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="Lista de fichas medicas" />
+
+    <TextView
+        android:id="@+id/text2_second"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:textSize="20dp"
+        android:text="Dr. " />
+
+    <Button
+        android:id="@+id/btn_atras_second"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Cerrar sesion" />
+
+
+</LinearLayout>
